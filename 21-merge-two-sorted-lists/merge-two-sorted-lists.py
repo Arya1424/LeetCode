@@ -7,26 +7,13 @@ class Solution(object):
     def mergeTwoLists(self, list1, list2):
         head = ListNode()
         current = head
-        value1=list1
-        value2=list2
-        while value1 is not None and value2 is not None:
-            if value1.val<value2.val:
-                current.next=ListNode(value1.val)
-                value1=value1.next
-                current=current.next
+        while list1 and list2:
+            if list1.val<list2.val:
+                current.next=list1
+                list1=list1.next
             else:
-                current.next=ListNode(value2.val)
-                value2=value2.next
-                current=current.next
-
-        while value1 is not None:
-            current.next=ListNode(value1.val)
-            value1=value1.next
+                current.next=list2
+                list2=list2.next
             current=current.next
-
-        while value2 is not None:
-            current.next=ListNode(value2.val)
-            value2=value2.next
-            current=current.next
-
+        current.next=list1 if list1 else list2
         return head.next
