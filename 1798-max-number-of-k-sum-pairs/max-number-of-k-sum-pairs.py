@@ -1,14 +1,17 @@
 class Solution(object):
     def maxOperations(self, nums, k):
-        m={}
+        i,j=0,len(nums)-1
         res=0
-        for i in nums:
-            diff=k-i
-            if diff in m and m[diff]>0:
+        nums.sort()
+        while i<j:
+            temp=nums[i]+nums[j]
+            if temp==k:
                 res+=1
-                m[diff]-=1
+                i+=1
+                j-=1
+            elif temp>k:
+                j-=1
             else:
-                m[i]=m.get(i,0)+1
+                i+=1
         return res
-
         
