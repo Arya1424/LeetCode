@@ -8,11 +8,13 @@ class Solution(object):
     def searchBST(self, root, val):
         curr=root
         while curr:
-            if val==curr.val:
+            if not curr:
+                return []
+            if curr.val==val:
                 return curr
-            elif val<curr.val:
-                curr=curr.left
-            else:
+            elif val>curr.val:
                 curr=curr.right
-        return None
+            else:
+                curr=curr.left
+        
         
