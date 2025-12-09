@@ -1,13 +1,11 @@
-class Solution(object):
-    def isValid(self, s):
+class Solution:
+    def isValid(self, s: str) -> bool:
+        p={')':'(', ']':'[', '}':'{'}
         stack=[]
-        brackets={"(":")","{":"}","[":"]"}
         for i in s:
-            if i in brackets:
-                stack.append(i)
-            elif i in brackets.values():
-                if not stack or brackets[stack.pop()]!=i:
-                    return False
+            if stack and i in p and stack[-1]==p[i]:
+                stack.pop()
             else:
-                return False
-        return len(stack)==0
+                stack.append(i)
+        return not stack
+        
