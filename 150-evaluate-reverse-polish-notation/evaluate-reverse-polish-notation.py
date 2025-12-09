@@ -1,20 +1,19 @@
-class Solution(object):
-    def evalRPN(self, tokens):
-        stack = []
-        for token in tokens:
-            if token.isdigit() or (token.startswith('-') and len(token) > 1):
-                stack.append(int(token))
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack=[]
+        for i in tokens:
+            if i not in "+-/*":
+                stack.append(int(i))
             else:
-                b = stack.pop()
-                a = stack.pop()
-                if token == '+':
-                    stack.append(a + b)
-                elif token == '-':
-                    stack.append(a - b)
-                elif token == '*':
-                    stack.append(a * b)
-                elif token == '/':
-                    stack.append(int(a / b) if a * b > 0 else -(-a // b))
-
+                b, a=stack.pop(), stack.pop()
+                if i=="*":
+                    stack.append(a*b)
+                elif i=="/":
+                    stack.append(int(float(a/b)))
+                elif i=="+":
+                    stack.append(a+b)
+                else:
+                    stack.append(a-b)
         return stack.pop()
+
         
