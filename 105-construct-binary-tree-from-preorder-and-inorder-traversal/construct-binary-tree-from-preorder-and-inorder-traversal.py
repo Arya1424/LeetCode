@@ -7,19 +7,11 @@
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        pre=ind=0
-        def dfs(limit):
-            nonlocal pre, ind
-            if pre>=len(preorder):
-                return None
-            if inorder[ind]==limit:
-                ind+=1
-                return None
+        if not preorder or not inorder:
+            return None
 
-            root=TreeNode(preorder[pre])
-            pre+=1
-            root.left=dfs(root.val)
-            root.right=dfs(limit)
-            return root
-
-        return dfs(float('inf'))
+        root=TreeNode(preorder[0])
+        mid=inorder.index(preorder[0])
+        root.left=self.buildTree(preorder[1:mid+1], inorder[:mid])
+        root.right=self.buildTree(preorder[mid+1:], inorder[mid+1:])
+        return root
