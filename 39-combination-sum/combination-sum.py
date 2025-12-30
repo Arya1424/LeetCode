@@ -1,22 +1,15 @@
-class Solution(object):
-    def combinationSum(self, candidates, target):
-        #backtracking
-        result=[]
-         
-        def backtrack(start,path,total):
-            if target==total:
-                result.append(list(path))
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res=[]
+        def backtrack(i, curr, total):
+            if total==target:
+                res.append(curr.copy())
                 return
-            elif total>target:
+            if i>=len(candidates) or total>target:
                 return
-            
-            for i in range(start,len(candidates)):
-                path.append(candidates[i])
-                backtrack(i,path,total+candidates[i])
-                path.pop()
-            
-        backtrack(0,[],0)
-        return result
-        
-
-        
+            curr.append(candidates[i])
+            backtrack(i, curr, total+candidates[i])
+            curr.pop()
+            backtrack(i+1, curr, total)
+        backtrack(0, [], 0)
+        return res
