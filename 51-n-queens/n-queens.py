@@ -1,24 +1,29 @@
-class Solution(object):
-    def solveNQueens(self, n):
-        def backtrack(row,cols,diag1,diag2,board):
-            if row==n:
-                result.append(["".join(r) for r in board])
-                return
-            for col in range(n):
-                if col in cols or (row-col) in diag1 or (col+row) in diag2:
-                    continue
-                board[row][col]="Q"
-                cols.add(col)
-                diag1.add(row-col)
-                diag2.add(row+col)
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        col=set()
+        posdiag=set()
+        negdiag=set()
 
-                backtrack(row+1,cols,diag1,diag2,board)
-                
-                board[row][col]="."
-                cols.remove(col)
-                diag1.remove(row-col)
-                diag2.remove(row+col)
-        result=[]
-        board=[["."]*n for i in range(n)]
-        backtrack(0,set(),set(),set(),board)
-        return result
+        res=[]
+        board=[['.']*n for _ in range(n)]
+
+        def backtrack(r):
+            if r==n:
+                copy=["".join(row) for row in board]
+                res.append(copy)
+                return
+            for c in range(n):
+                if c in col or (r+c) in posdiag or (r-c) in negdiag:
+                    continue
+                col.add(c)
+                posdiag.add(r+c)
+                negdiag.add(r-c)
+                board[r][c]="Q"
+                backtrack(r+1)
+                col.remove(c)
+                posdiag.remove(r+c)
+                negdiag.remove(r-c)
+                board[r][c]="."
+
+        backtrack(0)
+        return res
