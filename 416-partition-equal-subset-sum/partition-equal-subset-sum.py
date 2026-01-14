@@ -1,15 +1,18 @@
-class Solution(object):
-    def canPartition(self, nums):
-        total = sum(nums)
-        if total % 2 != 0:
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        if sum(nums)%2==1:
             return False
 
-        target = total // 2
-        dp = [False] * (target + 1)
-        dp[0] = True  # Base case: zero sum is always achievable
+        n=len(nums)
+        dp=set()
+        dp.add(0)
+        target=sum(nums)//2
 
-        for num in nums:
-            for i in range(target, num - 1, -1):
-                dp[i] = dp[i] or dp[i - num]
+        for i in range(n-1,-1,-1):
+            nextDp=set()
+            for t in dp:
+                nextDp.add(nums[i]+t)
+                nextDp.add(t)
 
-        return dp[target]
+            dp=nextDp
+        return True if target in dp else False
