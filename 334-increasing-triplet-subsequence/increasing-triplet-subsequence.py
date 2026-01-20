@@ -1,5 +1,5 @@
-class Solution(object):
-    def increasingTriplet(self, nums):
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
         first=second=float('inf')
 
         for i in nums:
@@ -9,4 +9,5 @@ class Solution(object):
                 second=i
             else:
                 return True
+
         return False
