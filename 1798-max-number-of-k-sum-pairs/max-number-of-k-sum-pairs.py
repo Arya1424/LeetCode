@@ -1,17 +1,16 @@
-class Solution(object):
-    def maxOperations(self, nums, k):
-        i,j=0,len(nums)-1
-        res=0
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
         nums.sort()
-        while i<j:
-            temp=nums[i]+nums[j]
-            if temp==k:
-                res+=1
-                i+=1
-                j-=1
-            elif temp>k:
-                j-=1
+        count=0
+        l, r=0, len(nums)-1
+        while l<r:
+            s=nums[l]+nums[r]
+            if s==k:
+                count+=1
+                r-=1
+                l+=1
+            elif s>k:
+                r-=1
             else:
-                i+=1
-        return res
-        
+                l+=1
+        return count
