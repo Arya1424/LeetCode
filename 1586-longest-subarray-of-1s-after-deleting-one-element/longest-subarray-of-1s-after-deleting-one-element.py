@@ -1,16 +1,18 @@
-class Solution(object):
-    def longestSubarray(self, nums):
-        max_w=0
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
         l=0
-        num_z=0
+        maxlen=0
+        flag=False
         for r in range(len(nums)):
             if nums[r]==0:
-                num_z+=1
-            while num_z>1:
-                if nums[l]==0:
-                    num_z-=1
-                l+=1
-            max_w=max(max_w,r-l)
-        return max_w
+                if not flag:
+                    flag=True
+                else:
+                    while nums[l]==1:
+                        l+=1
+                    l+=1
+            maxlen=max(maxlen, r-l)
 
-        
+        return maxlen
+            
+            
