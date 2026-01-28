@@ -1,8 +1,6 @@
-class Solution(object):
-    def uniqueOccurrences(self, arr):
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
         freq={}
-        for num in arr:
-            freq[num]=freq.get(num,0)+1
-        
+        for i in arr:
+            freq[i]=freq.get(i, 0)+1
         return len(set(freq.values()))==len(freq.values())
-        
