@@ -1,5 +1,5 @@
-class Solution(object):
-    def removeStars(self, s):
+class Solution:
+    def removeStars(self, s: str) -> str:
         stack=[]
         for i in s:
             if i=="*":
@@ -7,5 +7,3 @@ class Solution(object):
             else:
                 stack.append(i)
         return "".join(stack)
-
-        
